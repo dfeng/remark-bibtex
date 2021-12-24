@@ -13,7 +13,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
           # Defaults to the user or organization that owns the workflow file
-          scope: '@benchmark-urbanism'
+          scope: '@supremum'
       - run: yarn
       - run: yarn test
       - run: yarn publish --access public
