@@ -43,7 +43,7 @@ function plugin(pluginOptions) {
       } else {
         newChildren.push({
           type: 'text',
-          value: node.value.trimEnd(),
+          value: node.value.slice(0, citeEndIdx).trimEnd(),
         })
       }
       // create the citation reference
