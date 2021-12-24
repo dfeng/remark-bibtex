@@ -12,10 +12,10 @@ test('Infer citation A', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        '[^1]\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+        '[^1]\n\n[^1]: Wasserman, S. & Faust, K., 1994. Social Network Analysis, Cambridge: Cambridge University Press.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })
 
 test('Infer citation B', async () => {
@@ -26,10 +26,10 @@ test('Infer citation B', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        '[^1]\n\n[^1]: 1\\. Harris CR, Millman KJ, van der Walt SJ, Gommers R, Virtanen P, Cournapeau D, et al. Array programming with NumPy. Nature \\[Internet]. 2020 Sep;585(7825):357–62. Available from: http://www.nature.com/articles/s41586-020-2649-2\n'
+        '[^1]\n\n[^1]: Harris, C.R. et al., 2020. Array programming with NumPy. Nature, 585(7825), pp.357–362. Available at: http://www.nature.com/articles/s41586-020-2649-2.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })
 
 test('Infer citation A in context', async () => {
@@ -40,10 +40,10 @@ test('Infer citation A in context', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        '# My Document\n\nSo here is my citation[^1]. End of story.\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+        '# My Document\n\nSo here is my citation[^1]. End of story.\n\n[^1]: Wasserman, S. & Faust, K., 1994. Social Network Analysis, Cambridge: Cambridge University Press.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })
 
 test('Infer citation A in context (without numbers)', async () => {
@@ -54,10 +54,10 @@ test('Infer citation A in context (without numbers)', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        '# My Document\n\nSo here is my citation (Wasserman & Faust, 1994)[^1]. End of story.\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+        '# My Document\n\nSo here is my citation (Wasserman & Faust, 1994)[^1]. End of story.\n\n[^1]: Wasserman, S. & Faust, K., 1994. Social Network Analysis, Cambridge: Cambridge University Press.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })
 
 test('Infer citations A & B', async () => {
@@ -68,10 +68,10 @@ test('Infer citations A & B', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        'Ref A:[^1] Ref B:[^2]\n\n[^1]: 1\\. Harris CR, Millman KJ, van der Walt SJ, Gommers R, Virtanen P, Cournapeau D, et al. Array programming with NumPy. Nature \\[Internet]. 2020 Sep;585(7825):357–62. Available from: http://www.nature.com/articles/s41586-020-2649-2\n\n[^2]: 2\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+        'Ref A:[^1] Ref B:[^2]\n\n[^1]: Harris, C.R. et al., 2020. Array programming with NumPy. Nature, 585(7825), pp.357–362. Available at: http://www.nature.com/articles/s41586-020-2649-2.\n\n[^2]: Wasserman, S. & Faust, K., 1994. Social Network Analysis, Cambridge: Cambridge University Press.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })
 test('Infer citations A & B with reverse order and duplicate entry', async () => {
   return remark()
@@ -81,8 +81,8 @@ test('Infer citations A & B with reverse order and duplicate entry', async () =>
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        'Ref A:[^1] Ref B:[^2] Ref C:[^1]\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n\n[^2]: 2\\. Harris CR, Millman KJ, van der Walt SJ, Gommers R, Virtanen P, Cournapeau D, et al. Array programming with NumPy. Nature \\[Internet]. 2020 Sep;585(7825):357–62. Available from: http://www.nature.com/articles/s41586-020-2649-2\n'
+        'Ref A:[^1] Ref B:[^2] Ref C:[^1]\n\n[^1]: Wasserman, S. & Faust, K., 1994. Social Network Analysis, Cambridge: Cambridge University Press.\n\n[^2]: Harris, C.R. et al., 2020. Array programming with NumPy. Nature, 585(7825), pp.357–362. Available at: http://www.nature.com/articles/s41586-020-2649-2.\n'
       )
     })
-    .catch((err) => console.error(err))
+    // .catch((err) => console.error(err))
 })

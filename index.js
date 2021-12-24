@@ -83,8 +83,9 @@ function plugin(pluginOptions) {
     const citedText = citations
       .format('bibliography', {
         format: 'text',
-        template: 'vancouver',
+        template: 'harvard1',
         entry: uniqueCiteRefs,
+        nosort: true,
       })
       .split('\n')
     uniqueCiteRefs.forEach((citeRef, idx) => {
