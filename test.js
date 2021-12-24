@@ -45,6 +45,21 @@ test('Infer citation A in context', async () => {
     })
     .catch((err) => console.error(err))
 })
+
+test('Infer citation A in context (without numbers)', async () => {
+  return remark()
+    .use(footnotes)
+    .use(remarkBibtex, { bibtexFile: bibtexFilePath, numbers: false })
+    .process('# My Document\n\nSo here is my citation (@Wasserman1994). End of story.\n\n')
+    .then((content) => content.toString())
+    .then((markdown) => {
+      expect(markdown).toBe(
+        '# My Document\n\nSo here is my citation (@Wasserman1994)[^1]. End of story.\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+      )
+    })
+    .catch((err) => console.error(err))
+})
+
 test('Infer citations A & B', async () => {
   return remark()
     .use(footnotes)
