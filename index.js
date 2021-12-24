@@ -11,6 +11,7 @@ function plugin(pluginOptions) {
     )
   // regex for identifying citation keys - use double escape to prevent prettier auto-removing
   const regexp = new RegExp('\\(\\@(.*?)\\)')
+  const numbers = pluginOptions.numbers || true
   // transformer
   async function transformer(markdownAST) {
     // read-in bibtex
@@ -29,7 +30,6 @@ function plugin(pluginOptions) {
       const citeStartIdx = match.index
       const citeEndIdx = match.index + match[0].length
       const newChildren = []
-      const numbers = pluginOptions.numbers || true
       if (numbers) {
         // if preceding string
         if (citeStartIdx !== 0) {
