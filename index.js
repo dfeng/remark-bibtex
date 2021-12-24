@@ -29,12 +29,19 @@ function plugin(pluginOptions) {
       const citeStartIdx = match.index
       const citeEndIdx = match.index + match[0].length
       const newChildren = []
-      // if preceding string
-      if (citeStartIdx !== 0) {
-        // create a new child node
+      if (pluginOptions.numbers) {
+        // if preceding string
+        if (citeStartIdx !== 0) {
+          // create a new child node
+          newChildren.push({
+            type: 'text',
+            value: node.value.slice(0, citeStartIdx).trimEnd(),
+          })
+        }
+      } else {
         newChildren.push({
           type: 'text',
-          value: node.value.slice(0, citeStartIdx).trimEnd(),
+          value: node.value.trimEnd(),
         })
       }
       // create the citation reference
