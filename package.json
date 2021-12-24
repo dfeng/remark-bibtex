@@ -1,13 +1,13 @@
 {
-  "name": "@benchmark-urbanism/remark-bibtex",
-  "version": "0.4.0",
+  "name": "@supremum/remark-bibtex",
+  "version": "0.1.0",
   "description": "Remark plugin to generate citations from a bibtex file",
-  "homepage": "https://github.com/benchmark-urbanism/remark-bibtex#readme",
+  "homepage": "https://github.com/dfeng/remark-bibtex#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/benchmark-urbanism/remark-bibtex.git"
+    "url": "https://github.com/dfeng/remark-bibtex.git"
   },
-  "author": "benchmark-urbanism",
+  "author": "dfeng",
   "license": "MIT",
   "keywords": [
     "mdast",
@@ -23,7 +23,7 @@
     "CSL"
   ],
   "bugs": {
-    "url": "https://github.com/benchmark-urbanism/remark-bibtex/issues"
+    "url": "https://github.com/dfeng/remark-bibtex/issues"
   },
   "files": [
     "index.js",
