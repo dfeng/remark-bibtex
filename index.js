@@ -1,4 +1,5 @@
 const citejs = require('citation-js')
+require('@citation-js/plugin-doi')
 const fs = require('fs')
 const visit = require('unist-util-visit')
 module.exports = plugin
@@ -31,23 +32,22 @@ function plugin(pluginOptions) {
       const citeStartIdx = match.index
       const citeEndIdx = match.index + match[0].length
       const newChildren = []
-      if (numbers) {
-        // if preceding string
-        if (citeStartIdx !== 0) {
-          // create a new child node
-          newChildren.push({
-            type: 'text',
-            value: node.value.slice(0, citeStartIdx).trimEnd(),
-          })
-        }
-      } else {
+      // if preceding string
+      if (citeStartIdx !== 0) {
+        // create a new child node
         newChildren.push({
           type: 'text',
-          value: node.value.slice(0, citeEndIdx).trimEnd(),
+          value: node.value.slice(0, citeStartIdx).trimEnd(),
         })
       }
       // create the citation reference
       const citeRef = match[1]
+      if (!numbers) {
+        newChildren.push({
+          type: 'text',
+          value: " " + citations.format('citation', {entry: citeRef})
+        })
+      }
       let footnoteKey
       // label depends if new or not
       if (!uniqueCiteRefs.includes(citeRef)) {

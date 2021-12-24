@@ -54,7 +54,7 @@ test('Infer citation A in context (without numbers)', async () => {
     .then((content) => content.toString())
     .then((markdown) => {
       expect(markdown).toBe(
-        '# My Document\n\nSo here is my citation (@Wasserman1994)[^1]. End of story.\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
+        '# My Document\n\nSo here is my citation (Wasserman & Faust, 1994)[^1]. End of story.\n\n[^1]: 1\\. Wasserman S, Faust K. Social Network Analysis. Cambridge: Cambridge University Press; 1994. \n'
       )
     })
     .catch((err) => console.error(err))
