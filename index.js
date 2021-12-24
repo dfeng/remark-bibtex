@@ -29,7 +29,8 @@ function plugin(pluginOptions) {
       const citeStartIdx = match.index
       const citeEndIdx = match.index + match[0].length
       const newChildren = []
-      if (pluginOptions.numbers) {
+      const numbers = pluginOptions.numbers || true
+      if (numbers) {
         // if preceding string
         if (citeStartIdx !== 0) {
           // create a new child node
