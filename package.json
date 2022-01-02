@@ -1,6 +1,6 @@
 {
   "name": "@supremum/remark-bibtex",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Remark plugin to generate citations from a bibtex file",
   "homepage": "https://github.com/dfeng/remark-bibtex#readme",
   "repository": {
