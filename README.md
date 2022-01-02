@@ -1,3 +1,10 @@
+# Custom Changes
+
+ - Use `[@Wasserman1994]` notation instead of `(@Wasserman1994)`
+ - Use citation key as footnote identifier
+ - Add `(Wasserman & Faust, 1994)[^Wasserman1994]` instead of just `[^1]` (in case of numeric references being used/created elsewhere)
+ - Use Harvard bibliography format
+
 # remark-bibtex
 
 Remark-bibtex is a [remark](https://github.com/wooorm/remark) plugin to generate footnoted citations from a `bibtex` file. It uses [`citation-js`](https://github.com/citation-js/citation-js) to load a specified `.bib` file from which citations will be retrieved and added to the markdown file's footnotes section.

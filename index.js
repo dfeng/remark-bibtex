@@ -1,5 +1,4 @@
 const citejs = require('citation-js')
-require('@citation-js/plugin-doi')
 const fs = require('fs')
 const visit = require('unist-util-visit')
 module.exports = plugin
@@ -11,9 +10,7 @@ function plugin(pluginOptions) {
       'Options requires a "bibtexFile" key with a filepath to the .bib file as a value.'
     )
   // regex for identifying citation keys - use double escape to prevent prettier auto-removing
-  const regexp = new RegExp('\\(\\@(.*?)\\)')
-  if (!('numbers' in pluginOptions)) pluginOptions.numbers = true
-  const numbers = pluginOptions.numbers
+  const regexp = new RegExp('\\[\\@(.*?)\\]')
   // transformer
   async function transformer(markdownAST) {
     // read-in bibtex
@@ -37,30 +34,36 @@ function plugin(pluginOptions) {
         // create a new child node
         newChildren.push({
           type: 'text',
-          value: node.value.slice(0, citeStartIdx).trimEnd(),
+          value: node.value.slice(0, citeStartIdx).trimEnd() + " ",
         })
       }
       // create the citation reference
       const citeRef = match[1]
-      if (!numbers) {
-        newChildren.push({
-          type: 'text',
-          value: " " + citations.format('citation', {entry: citeRef})
-        })
-      }
-      let footnoteKey
+      newChildren.push({
+        type: 'html',
+        value: '<span class="citation">'
+      })
+      newChildren.push({
+        type: 'text',
+        value: citations.format('citation', {entry: citeRef})
+      })
+      newChildren.push({
+        type: 'html',
+        value: '</span>'
+      })
+      // let footnoteKey
       // label depends if new or not
       if (!uniqueCiteRefs.includes(citeRef)) {
-        footnoteKey = uniqueCiteRefs.length + 1
+        // footnoteKey = uniqueCiteRefs.length + 1
         uniqueCiteRefs.push(citeRef)
-      } else {
-        footnoteKey = uniqueCiteRefs.indexOf(citeRef) + 1
+      // } else {
+      //   footnoteKey = uniqueCiteRefs.indexOf(citeRef) + 1
       }
       // add
       const citeNode = {
         type: 'footnoteReference',
-        identifier: footnoteKey,
-        label: footnoteKey,
+        identifier: citeRef,
+        label: citeRef,
       }
       newChildren.push(citeNode)
       // if trailing string
@@ -92,8 +95,8 @@ function plugin(pluginOptions) {
       // add to footnotes
       markdownAST.children.push({
         type: 'footnoteDefinition',
-        identifier: idx + 1,
-        label: idx + 1,
+        identifier: citeRef,
+        label: citeRef,
         children: [
           {
             type: 'paragraph',
