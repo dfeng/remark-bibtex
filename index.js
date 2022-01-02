@@ -10,7 +10,7 @@ function plugin(pluginOptions) {
       'Options requires a "bibtexFile" key with a filepath to the .bib file as a value.'
     )
   // regex for identifying citation keys - use double escape to prevent prettier auto-removing
-  const regexp = new RegExp('\\[\\@(.*?)\\]')
+  const regexp = new RegExp('\\(\\@(.*?)\\)')
   // transformer
   async function transformer(markdownAST) {
     // read-in bibtex
