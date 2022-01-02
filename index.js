@@ -39,18 +39,18 @@ function plugin(pluginOptions) {
       }
       // create the citation reference
       const citeRef = match[1]
-      newChildren.push({
-        type: 'html',
-        value: '<span class="citation">'
-      })
+      // newChildren.push({
+      //   type: 'html',
+      //   value: '<span class="citation">'
+      // })
       newChildren.push({
         type: 'text',
         value: citations.format('citation', {entry: citeRef})
       })
-      newChildren.push({
-        type: 'html',
-        value: '</span>'
-      })
+      // newChildren.push({
+      //   type: 'html',
+      //   value: '</span>'
+      // })
       // let footnoteKey
       // label depends if new or not
       if (!uniqueCiteRefs.includes(citeRef)) {
