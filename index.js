@@ -10,7 +10,7 @@ function plugin(pluginOptions) {
       'Options requires a "bibtexFile" key with a filepath to the .bib file as a value.'
     )
   // regex for identifying citation keys - use double escape to prevent prettier auto-removing
-  const regexp = new RegExp('\\(\\@(.*?)\\)')
+  const regexp = new RegExp('\\[\\@(.*?)\\]')
   // transformer
   async function transformer(markdownAST) {
     // read-in bibtex
@@ -39,18 +39,10 @@ function plugin(pluginOptions) {
       }
       // create the citation reference
       const citeRef = match[1]
-      // newChildren.push({
-      //   type: 'html',
-      //   value: '<span class="citation">'
-      // })
       newChildren.push({
         type: 'text',
         value: citations.format('citation', {entry: citeRef})
       })
-      // newChildren.push({
-      //   type: 'html',
-      //   value: '</span>'
-      // })
       // let footnoteKey
       // label depends if new or not
       if (!uniqueCiteRefs.includes(citeRef)) {
