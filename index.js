@@ -38,19 +38,11 @@ function plugin(pluginOptions) {
         newChildren.push({
           type: 'text',
           value: citations.format('citation', { entry: citeRef })
-        })
-        let footnoteKey
-        // label depends if new or not
-        if (!uniqueCiteRefs.includes(citeRef)) {
-          footnoteKey = uniqueCiteRefs.length + 1
-          uniqueCiteRefs.push(citeRef)
-        } else {
-          footnoteKey = uniqueCiteRefs.indexOf(citeRef) + 1
-        }
-        newChildren.push({
+        },
+        {
           type: 'footnoteReference',
-          identifier: footnoteKey,
-          label: footnoteKey,
+          identifier: citeRef,
+          label: citeRef,
         })
       } else {
         // split existing child into new children
@@ -80,19 +72,12 @@ function plugin(pluginOptions) {
         //   value: '</span>'
         // })
         // add
-        let footnoteKey
-        // label depends if new or not
-        if (!uniqueCiteRefs.includes(citeRef)) {
-          footnoteKey = uniqueCiteRefs.length + 1
-          uniqueCiteRefs.push(citeRef)
-        } else {
-          footnoteKey = uniqueCiteRefs.indexOf(citeRef) + 1
-        }
-        newChildren.push({
+        const citeNode = {
           type: 'footnoteReference',
-          identifier: footnoteKey,
-          label: footnoteKey,
-        })
+          identifier: citeRef,
+          label: citeRef,
+        }
+        newChildren.push(citeNode)
         // if trailing string
         if (citeEndIdx < node.value.length) {
           newChildren.push({
@@ -100,6 +85,14 @@ function plugin(pluginOptions) {
             value: node.value.slice(citeEndIdx),
           })
         }
+      }
+      // let footnoteKey
+      // label depends if new or not
+      if (!uniqueCiteRefs.includes(citeRef)) {
+        // footnoteKey = uniqueCiteRefs.length + 1
+        uniqueCiteRefs.push(citeRef)
+        // } else {
+        //   footnoteKey = uniqueCiteRefs.indexOf(citeRef) + 1
       }
       // insert into the parent
       parent.children = [
@@ -123,8 +116,8 @@ function plugin(pluginOptions) {
       // add to footnotes
       markdownAST.children.push({
         type: 'footnoteDefinition',
-        identifier: idx + 1,
-        label: idx + 1,
+        identifier: citeRef,
+        label: citeRef,
         children: [
           {
             type: 'paragraph',
